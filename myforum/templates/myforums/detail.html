@@ -3,9 +3,10 @@
 {% block content %}
     {{ bbs.content }}
     <p>评论</p>
+    <a href="{% url 'myforum:comments' bbs.id %}">评论</a><hr/>
     {% for comment in comments %}
-        {{ comment.content }}
+        {{ comment.add_time|date:'Y-m-d-H:i:s' }}<br/>{{ comment.author }}<br/>
+        {{ comment.content }}<hr/>
     {% endfor %}
-    <a href="{% url 'myforum:comments' bbs.id %}">评论</a>
 
 {% endblock content %}

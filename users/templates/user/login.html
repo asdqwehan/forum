@@ -1,0 +1,13 @@
+{% extends 'myforums/base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    <form method="POST" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit">登录</button>
+        {% endbuttons %}
+    <input type="hidden" name="next" value='{% url 'myforum:index' %}'/>
+    </form>
+
+{% endblock content %}
