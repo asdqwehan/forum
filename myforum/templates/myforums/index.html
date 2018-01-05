@@ -1,0 +1,9 @@
+{% extends 'myforums/base.html' %}
+{% block content %}
+ {% for bbs in bbs_list %}
+            <a href="{% url 'myforum:detail' bbs.id %}">
+                {{ bbs.title }}</a><hr/>
+
+        {% endfor %}
+
+{% endblock content %}

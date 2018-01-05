@@ -1,0 +1,11 @@
+{% extends 'myforums/base.html' %}
+
+{% block content %}
+    {{ bbs.content }}
+    <p>评论</p>
+    {% for comment in comments %}
+        {{ comment.content }}
+    {% endfor %}
+    <a href="{% url 'myforum:comments' bbs.id %}">评论</a>
+
+{% endblock content %}

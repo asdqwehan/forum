@@ -1,0 +1,9 @@
+{% extends 'myforums/base.html' %}
+
+{% block content %}
+    <form method="POST" action="{% url 'myforum:comments' bbs.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">评论</button>
+    </form>
+{% endblock content %}
