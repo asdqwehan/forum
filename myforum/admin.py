@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from myforum.models import Bbs, Catepory, Comments
+from myforum.models import Bbs, Category, Comments
 
 #定制样式
 class Bbs_admin(admin.ModelAdmin):
@@ -14,5 +14,5 @@ class Bbs_admin(admin.ModelAdmin):
 
 
 admin.site.register(Bbs, Bbs_admin)
-admin.site.register(Catepory)
+admin.site.register(Category)
 admin.site.register(Comments)

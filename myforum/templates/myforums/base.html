@@ -39,9 +39,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">全部</a></li>
-            <li><a href="#">待定3</a></li>
-            <li><a href="#">待定4</a></li>
+            <li class=""><a href="#">全部</a></li>
+            {% for category in categories %}
+                {% ifequal category.id cate_id %}
+                <li class="active"><a href="{% url 'myforum:category' category.id %}">{{ category.name }}</a></li>
+                {% else %}
+                <li class=""><a href="{% url 'myforum:category' category.id %}">{{ category.name }}</a></li>
+                {% endifequal %}
+            {% endfor %}
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
@@ -55,13 +60,13 @@
                 <li><a href="https://v3.bootcss.com/examples/navbar-fixed-top/#">Another action</a></li>
                 <li><a href="https://v3.bootcss.com/examples/navbar-fixed-top/#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="https://v3.bootcss.com/examples/navbar-fixed-top/#">Separated link</a></li>
-                <li><a href="https://v3.bootcss.com/examples/navbar-fixed-top/#">One more separated link</a></li>
+                <li class="dropdown-header"></li>
+                  <li><a href="{% url 'users:logout' %}">登出</a></li>
+
               </ul>
             </li>
                     {% else %}
-                    <li><a href="{% url 'users:login' %}">请登录</a></li>
+                    <li><a href="{% url 'users:login' %}">登录</a></li>
 
                 {% endif %}
 
@@ -75,7 +80,14 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-      {% block content %}{% endblock content %}
+      {% block content %}
+              <a href="{% url 'myforum:new_bbs' %}">发布新贴</a><hr/>
+          {% for bbs in bbs_list %}
+            <a href="{% url 'myforum:detail' bbs.id %}">
+                {{ bbs.title }}</a><hr/>
+
+        {% endfor %}
+      {% endblock content %}
       </div>
 
     </div> <!-- /container -->

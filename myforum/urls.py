@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^detail/(\d+)/comments/$', views.comments, name='comments'),
     url(r'^new_bbs/$', views.new_bbs, name='new_bbs'),
     url(r'^detail/(\d+)/edit_bbs/$', views.edit_bbs, name='edit_bbs'),
+    url(r'^category/(\d+)/$', views.category, name='category'),
 ]
