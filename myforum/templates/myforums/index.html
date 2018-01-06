@@ -1,5 +1,7 @@
 {% extends 'myforums/base.html' %}
 {% block content %}
+    <a href="{% url 'myforum:new_bbs' %}">发布新贴</a><hr/>
+
  {% for bbs in bbs_list %}
             <a href="{% url 'myforum:detail' bbs.id %}">
                 {{ bbs.title }}</a><hr/>

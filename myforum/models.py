@@ -7,7 +7,7 @@ class Bbs(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User)
     add_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField()
+    update_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

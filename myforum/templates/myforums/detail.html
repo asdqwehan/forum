@@ -1,6 +1,7 @@
 {% extends 'myforums/base.html' %}
 
 {% block content %}
+    <a href="{% url 'myforum:edit_bbs' bbs.id %}">修改</a><hr/>
     {{ bbs.content }}
     <p>评论</p>
     <a href="{% url 'myforum:comments' bbs.id %}">评论</a><hr/>

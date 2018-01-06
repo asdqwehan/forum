@@ -2,7 +2,7 @@ from django.shortcuts import render
 from myforum.models import Bbs, Comments
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from myforum.forms import CommentsForm
+from myforum.forms import CommentsForm, BbsForm
 
 # Create your views here.
 def index(request):
@@ -31,3 +31,28 @@ def comments(request, bbs_id):
             return HttpResponseRedirect(reverse('myforum:detail', args=[bbs.id]))
     context = {'bbs': bbs, 'form': form}
     return render(request, 'myforums/comments.html', context)
+
+def new_bbs(request):
+    if request.method != 'POST':
+        form = BbsForm()
+    else:
+        form = BbsForm(data=request.POST)
+        if form.is_valid():
+            new_bbs = form.save(commit=False)
+            new_bbs.author = request.user
+            new_bbs.save()
+            return HttpResponseRedirect(reverse('myforum:index'))
+    context = {'form': form}
+    return render(request, 'myforums/new_bbs.html', context)
+
+def edit_bbs(request, bbs_id):
+    bbs = Bbs.objects.get(id=bbs_id)
+    if request.method != 'POST':
+        form = BbsForm(instance=bbs)
+    else:
+        form = BbsForm(instance=bbs, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('myforum:detail', args=[bbs.id]))
+    context = {'form': form, 'bbs': bbs}
+    return render(request, 'myforums/edit_bbs.html', context)

@@ -1,0 +1,12 @@
+{% extends 'myforums/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <form method="POST" action="{% url 'myforum:edit_bbs' bbs.id %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button name="submit">修改</button>
+    {% endbuttons %}
+    </form>
+{% endblock content %}
